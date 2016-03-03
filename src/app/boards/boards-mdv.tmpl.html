@@ -5,7 +5,13 @@
       be able to actually see the editing form when you click on a board.
       -->
     <div
-      class="simple-board">
+      class="simple-board"
+      ng-repeat="(boardId, board) in ctrl.boards"
+      ng-click="ctrl.setEditedBoard(boardId, board)"
+      >
+       <h3>{{$index + 1}}{{board.name}}</h3>
+      <p>{{board.location}}</p>
+      <p>{{board.description}}</p>
     </div>
 
   </div>
@@ -19,10 +25,16 @@
       name="ctrl.createForm"
       class="create-form"
       role="form"
+      ng-submit="ctrl.createBoard(ctrl.newBoard, ctrl.createForm.$valid)"
       novalidate>
+      Name: <input type="text" ng-model="ctrl.newBoard.name">
+      Location: <input type="text" ng-model="ctrl.newBoard.location">
+      Proposed Date: <input type="text" ng-model="ctrl.newBoard.proposedDate">
+      <button type="submit">Create</button>
     </form>
   </div>
   <!-- EDITING -->
+  <!-- if isEditing on the board is set to true then display this html -->
   <div ng-if="ctrl.isEditing" class="col-xs-12 board-details">
     <h3>Editing {{ ctrl.editedBoard.title }}</h3>
     <hr/>
@@ -30,7 +42,13 @@
       name="ctrl.updateForm"
       class="edit-form"
       role="form"
+      ng-submit="ctrl.updateBoard(ctrl.editedBoardId, ctrl.editedBoard, ctrl.updateForm.$valid)"
       novalidate>
+      Name: <input type="text" ng-model="ctrl.editedBoard.name">
+      Location: <input type="text" ng-model="ctrl.editedBoard.location">
+      Proposed Date: <input type="text" ng-model="ctrl.editedBoard.proposedDate">
+      <button type="submit">Create</button>
+      <button type="button" ng-click="ctrl.cancelEditing()">Cancel</button>
     </form>
   </div>
 </div>

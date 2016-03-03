@@ -7,6 +7,9 @@ angular.module('noterious')
     ctrl.loading = false;
 
     ctrl.newBoard = {
+      name: '', 
+      location: '', 
+      proposedDate: '', 
       title: '',
       description: '',
       isPublic: false
@@ -45,6 +48,7 @@ angular.module('noterious')
       if (isValid) {
         ctrl.loading = true;
         // CREATE BOARD
+        ctrl.boards[1234] = board;
         ctrl.resetForm();
       }
     };
@@ -53,6 +57,7 @@ angular.module('noterious')
       if (isValid) {
         ctrl.loading = true;
         // UPDATE BOARD
+        ctrl.boards[ctrl.editedBoard] = board;
         ctrl.cancelEditing();
       }
     };
